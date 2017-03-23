@@ -1,7 +1,11 @@
 asect 0x00
 
 
-# REPRESENTING BALL VELOCITY. PAGE 6.
+# ALL OF THE BELOW WILL BE SEPERATED INTO SEPERATE SUBROUTINES.
+# CURRENTLY SEPERATED BY A SERIES OF HYPHENS
+# ---------------------------------------------------------------
+
+# REPRESENTING BALL VELOCITY. PAGE 6
 
 ldi r0,vy
 ld r0,r0
@@ -25,6 +29,14 @@ shl r2
 shl r1
 shl r2
 
+ldi r3,vxy
+st r3,r2
+
+#----------------------------------------------------------------
+
+# REFLECTING THE BALL. PAGE 7
+
+
 
 
 
@@ -36,5 +48,6 @@ vx: dc 0b00000101 # THIS INPUT WILL BE TAKEN FROM LOGISIM
 vy: dc 0b00000111 # THIS INPUT WILL BE TAKEN FROM LOGISIM
 endinputs>
 
+vxy: ds 1
 
 end
