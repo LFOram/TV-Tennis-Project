@@ -1002,6 +1002,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     </comp>
     <comp lib="0" loc="(310,130)" name="Clock">
       <a name="facing" val="north"/>
+      <a name="lowDuration" val="2"/>
     </comp>
     <comp lib="0" loc="(110,190)" name="Pin">
       <a name="label" val="Up"/>
@@ -1125,6 +1126,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(310,40)" to="(310,100)"/>
     <comp lib="0" loc="(280,130)" name="Clock">
       <a name="facing" val="north"/>
+      <a name="lowDuration" val="63"/>
     </comp>
     <comp lib="3" loc="(130,70)" name="Shifter">
       <a name="width" val="32"/>
@@ -1597,6 +1599,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     </comp>
     <comp lib="0" loc="(310,150)" name="Clock">
       <a name="facing" val="north"/>
+      <a name="lowDuration" val="4"/>
     </comp>
     <comp lib="0" loc="(130,220)" name="Constant">
       <a name="facing" val="north"/>
