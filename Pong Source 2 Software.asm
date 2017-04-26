@@ -17,17 +17,75 @@ asect 0x00
 
 
 
+
+
+
+#-----------------------------MAIN-----------------------------------
+
 reset:
 
+br scoreboardReset
+
+
+main0:
+
+
+ldi r0,direction # load current direction of b
+ld r0,r0
+ldi r1,0
+cmp r1,r0
+beq ballleft
+ldi r1,1
+cmp r1,r0
+beq ballright
+
+main1:
+
+ldi r0,0xFE
+ld r0,r0
+ldi r1,0
+cmp r0,r1
+beq scoreLeft
+ldi r1,255
+cmp r0,r1
+beq scoreRight
+
+
+#---------------------------SCOREBOARD--------------------------------
+
+scoreLeft:
+
+ldi r0,0xFD
+ld r0,r1
+inc r1
+st r0,r1
 br ballreset
 
 
-main:
+scoreRight:
+
+ldi r0,0xFC
+ld r0,r1
+inc r1
+st r0,r1
+br ballreset
+
+
+scoreboardReset:
+
+ldi r0,0xFC
+ld r0,r0
+ldi r1,0
+st r0,r1
+ldi r0,0xFD
+ld r0,r0
+st r0,r1
+br ballreset
 
 
 
 
-
+#-----------------------------BALL----------------------------------------
 
 
 ballreset:
@@ -58,22 +116,56 @@ br ballleft
 
 ballright:
 
+ldi r0,XSpeed
+ld r0,r0
+ldi r1,YAngle
+ld r1,r1
+
+ldi r2,0xFE # load x coord ball
+ld r2,r2
+add r2,r0
+st r2,r0  # store new x coord
+
+ldi r2,0xFF # load y coord
+ld r2,r2
+add r2,r1
+st r2,r1 # st new coord
+br paddleshift
+
 
 
 ballleft:
 
+ldi r0,XSpeed 
+ld r0,r0
+neg r0
+ldi r1,YAngle
+ld r1,r1
 
 
+ldi r2,0xFE # load x coord ball
+ld r2,r2
+add r2,r0
+st r2,r0 # st new x coord
+
+ldi r2,0xFF # load y coord ball
+ld r2,r2
+add r2,r1
+st r2,r1 # st new y coord
+br paddleshift
+
+
+#----------------------PADDLE-------------------------------------
 
 
 paddlereset:
 
-ldi r0,0xFA
+ldi r0,0xFA 
 ldi r2,0xFB
 ldi r1,initialPaddlePosition
 st r0,r1
 st r2,r1
-br main
+br main0
 
 
 
@@ -100,7 +192,7 @@ beq downinput
 	ldi r0,0xFA # load paddle position
 	ld r0,r1
 	st r0,r1
-	br main
+	br main1
 	
 	upinput:
 	
@@ -115,7 +207,7 @@ beq downinput
 	bhi nomove # if it is bigger, then dont move the board
 	ldi r0,0xFA
 	st r0,r3 # store new paddle middle position in 0xFA
-	br main
+	br main1
 
 	downinput:
 
@@ -130,12 +222,12 @@ beq downinput
 	blo nomove # if it is bigger, then dont move the board
 	ldi r0,0xFA
 	st r0,r3 # store new paddle middle position in 0xFA
-	br main
+	br main1
 
 
 
 
-
+#----------------VARIABLES----------------------------------
 
 
 
@@ -146,6 +238,8 @@ halt
 initialBallPositionX: dc 128
 initialBallPositionY: dc 128
 initialPaddlePosition: dc 128
+XSpeed: dc 4
+YAngle: dc 0
 direction: dc 0
 
 end
