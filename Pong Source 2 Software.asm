@@ -14,32 +14,41 @@
 
 asect 0x00
 
-
-
-
-
-
-
 #-----------------------------MAIN-----------------------------------
 
 reset:
 
-br scoreboardReset
+jsr scoreboardReset
+#jsr ballReset
+#jsr paddleReset
+
 
 
 main0:
 
-
+jsr checkIfScore
 ldi r0,direction # load current direction of b
 ld r0,r0
 ldi r1,0
 cmp r1,r0
-beq ballleft
+beq ballLeft
 ldi r1,1
 cmp r1,r0
-beq ballright
+beq ballRight
 
 main1:
+
+jsr paddleShift
+br main0
+
+
+
+
+
+
+#---------------------------SCOREBOARD--------------------------------
+
+checkIfScore:
 
 ldi r0,0xFE
 ld r0,r0
@@ -49,9 +58,7 @@ beq scoreLeft
 ldi r1,255
 cmp r0,r1
 beq scoreRight
-
-
-#---------------------------SCOREBOARD--------------------------------
+rts
 
 scoreLeft:
 
@@ -59,7 +66,7 @@ ldi r0,0xFD
 ld r0,r1
 inc r1
 st r0,r1
-br ballreset
+rts
 
 
 scoreRight:
@@ -68,7 +75,7 @@ ldi r0,0xFC
 ld r0,r1
 inc r1
 st r0,r1
-br ballreset
+rts
 
 
 scoreboardReset:
@@ -80,7 +87,7 @@ st r0,r1
 ldi r0,0xFD
 ld r0,r0
 st r0,r1
-br ballreset
+rts
 
 
 
@@ -88,7 +95,7 @@ br ballreset
 #-----------------------------BALL----------------------------------------
 
 
-ballreset:
+ballReset:
 
 ldi r0,0xFE
 ldi r1,initialBallPositionX
@@ -98,9 +105,9 @@ ldi r0,0xFF
 ldi r1,initialBallPositionY
 ld r1,r1
 st r0,r1
-br paddlereset
+rts
 
-ballmove:
+ballMove:
 
 ldi r0,0xFE
 ld r0,r0
@@ -110,11 +117,11 @@ ldi r2,direction
 ld r2,r2
 clr r3
 cmp r2,r3
-beq ballright
-br ballleft
+beq ballRight
+br ballLeft
 
 
-ballright:
+ballRight:
 
 ldi r0,XSpeed
 ld r0,r0
@@ -130,11 +137,11 @@ ldi r2,0xFF # load y coord
 ld r2,r2
 add r2,r1
 st r2,r1 # st new coord
-br paddleshift
+br main1
 
 
 
-ballleft:
+ballLeft:
 
 ldi r0,XSpeed 
 ld r0,r0
@@ -152,25 +159,25 @@ ldi r2,0xFF # load y coord ball
 ld r2,r2
 add r2,r1
 st r2,r1 # st new y coord
-br paddleshift
+br main1
 
 
 #----------------------PADDLE-------------------------------------
 
 
-paddlereset:
+paddleReset:
 
 ldi r0,0xFA 
 ldi r2,0xFB
 ldi r1,initialPaddlePosition
 st r0,r1
 st r2,r1
-br main0
+rts 
 
 
 
 
-paddleshift:
+paddleShift:
 
 ldi r0,0xF8 # load keyboard input
 ld r0,r0
@@ -181,20 +188,20 @@ ldi r2,1 # 1 = up
 ldi r3,2 # 2 = down
 
 cmp r0,r1
-beq nomove
+beq noMove
 cmp r0,r2
-beq upinput
+beq upInput
 cmp r0,r3
-beq downinput
+beq downInput
 
-	nomove:
+	noMove:
 
 	ldi r0,0xFA # load paddle position
 	ld r0,r1
 	st r0,r1
-	br main1
+	rts
 	
-	upinput:
+	upInput:
 	
 	ldi r0,0xFA # load paddle position
 	ld r0,r0 #  load paddle
@@ -204,12 +211,12 @@ beq downinput
 	add r2,r0 # find top paddle position
 	ldi r1,255 # load max board 0,255
 	cmp r0,r1 # compare top paddle> max board
-	bhi nomove # if it is bigger, then dont move the board
+	bhi noMove # if it is bigger, then dont move the board
 	ldi r0,0xFA
 	st r0,r3 # store new paddle middle position in 0xFA
-	br main1
+	rts
 
-	downinput:
+	downInput:
 
 	ldi r0,0xFA # load paddle position
 	ld r0,r0 #  load paddle
@@ -219,10 +226,10 @@ beq downinput
 	add r2,r0 # find bottom paddle position
 	ldi r1,0 # load lowest board 0,0
 	cmp r0,r1 # compare top paddle> max board
-	blo nomove # if it is bigger, then dont move the board
+	blo noMove # if it is bigger, then dont move the board
 	ldi r0,0xFA
 	st r0,r3 # store new paddle middle position in 0xFA
-	br main1
+	rts
 
 
 
@@ -233,6 +240,7 @@ beq downinput
 
 
 halt
+
 
 
 initialBallPositionX: dc 128
