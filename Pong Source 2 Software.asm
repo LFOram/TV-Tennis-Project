@@ -26,7 +26,7 @@ jsr scoreboardReset
 
 main0:
 
-jsr checkIfScore
+
 ldi r0,direction # load current direction of b
 ld r0,r0
 ldi r1,0
@@ -38,6 +38,8 @@ beq ballRight
 
 main1:
 
+jsr checkIfScore
+jsr initialHitDetect
 jsr paddleShift
 br main0
 
@@ -151,15 +153,94 @@ ld r1,r1
 
 
 ldi r2,0xFE # load x coord ball
-ld r2,r2
-add r2,r0
+ld r2,r3
+add r3,r0
+ldi r2,0xFE
 st r2,r0 # st new x coord
 
 ldi r2,0xFF # load y coord ball
-ld r2,r2
-add r2,r1
+ld r2,r3
+add r3,r1
+ldi r2,0xFF
 st r2,r1 # st new y coord
 br main1
+
+
+#---------------------HIT DETECTION-------------------------------
+
+initialHitDetect:
+
+ldi r0,0xFE
+ld r0,r0
+
+ldi r1,1         #*********** check 
+cmp r0,r1
+beq hitDetectL
+ldi r1,254    # check if ball is one away from board edge
+cmp r0,r1
+beq hitDetectR
+rts
+
+
+
+
+
+hitDetectL:
+
+ldi r0,0xFA
+ld r0,r0
+
+ldi r2,0xFF
+ld r2,r2
+ldi r1,8
+sub r2,r1
+add r1,r2 # get both sides of paddle
+
+cmp r0,r1 # if ball is higher than lowest part of paddle, continue
+bhi secondCheckL
+rts
+secondCheckL:
+cmp r0,r2 # if ball is lower than top of paddle, continue
+blo hitDetectedL
+rts
+hitDetectedL:
+ldi r0,direction
+ldi r1,1
+st r0,r1
+rts
+
+
+
+hitDetectR:
+
+ldi r0,0xFB
+ld r0,r0
+
+ldi r2,0xFF
+ld r2,r2
+ldi r1,8
+sub r2,r1
+add r1,r2 # get both sides of paddle
+cmp r0,r1 # if ball is higher than lowest part of paddle, continue
+bhi secondCheckR
+rts
+secondCheckR:
+cmp r0,r2 # if ball is lower than top of paddle, continue
+blo hitDetectedR
+rts
+hitDetectedR:
+ldi r0,direction
+ldi r1,0
+st r0,r1
+rts
+
+
+
+
+
+
+
+
 
 
 #----------------------PADDLE-------------------------------------
