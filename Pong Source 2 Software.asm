@@ -38,9 +38,9 @@ st r1,r0
 
 reset:
 
-jsr scoreboardReset
-jsr ballReset
-jsr paddleReset
+br scoreboardReset
+#jsr ballReset
+#jsr paddleReset
 
 
 
@@ -48,10 +48,10 @@ main0:
 
 
 
-jsr checkIfScore
-jsr initialHitDetect
-jsr paddleShift
-jsr ballMoveStart
+br checkIfScore
+#jsr initialHitDetect
+#jsr paddleShift
+#jsr ballMoveStart
 br main0
 
 
@@ -71,7 +71,7 @@ cmp r0,r1
 ldi r1,255  ## needs rework
 cmp r0,r1
 #beq scoreRight
-rts
+br initialHitDetect
 
 #scoreLeft:
 
@@ -109,7 +109,7 @@ st r0,r1
 ldi r0,0xFD
 st r0,r1
 
-rts
+br ballReset
 
 
 
@@ -131,7 +131,7 @@ ldc r1,r1
 st r0,r1
 ldi r0,0xFF
 st r0,r1
-rts
+br paddleReset
 
 ballMoveStart:
 
@@ -182,7 +182,7 @@ beq hitDetectLoadL
 ldi r1,254    # check if ball is one away from board edge
 cmp r0,r1
 beq hitDetectLoadR
-rts
+br paddleShift
 
 
 
@@ -192,14 +192,14 @@ hitDetectLoadL:
 ldi r0,0xDA
 ld r0,r0
 br hitDetect
-rts
+
 
 hitDetectLoadR:
 
 ldi r0,0xDB
 ld r0,r0
 br hitDetect
-rts
+
 
 
 hitDetect:
@@ -212,17 +212,17 @@ add r1,r2 # get both sides of paddle
 
 cmp r0,r1 # if ball is higher than lowest part of paddle, continue
 bhi secondCheck
-rts
+br paddleShift
 secondCheck:
 cmp r0,r2 # if ball is lower than top of paddle, continue
 blo hitDetected
-rts
+br paddleShift
 hitDetected:
 ldi r0,0xE0
 ld r0,r1
 not r1
 st r0,r1
-rts
+br paddleShift
 
 
 
@@ -241,7 +241,7 @@ ldi r0,0xFA
 ldi r2,0xFB
 st r0,r1
 st r2,r1
-rts 
+br main0
 
 
 
@@ -270,7 +270,7 @@ noMove:
 	st r0,r1
 	ldi r0,0xFA
 	st r0,r1
-	rts
+	br ballMoveStart
 	
 upInput:
 	
@@ -287,7 +287,7 @@ upInput:
 	st r0,r3 # store new paddle middle position in 0xFA
 	ldi r0,0xFA
 	st r0,r3
-	rts
+	br ballMoveStart
 
 downInput:
 
@@ -304,7 +304,7 @@ downInput:
 	st r0,r3 # store new paddle middle position in 0xFA
 	ldi r0,0xFA
 	st r0,r3
-	rts
+	br ballMoveStart
 
 
 
