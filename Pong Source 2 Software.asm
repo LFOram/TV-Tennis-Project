@@ -39,28 +39,19 @@ st r1,r0
 reset:
 
 jsr scoreboardReset
-#jsr ballReset
-#jsr paddleReset
+jsr ballReset
+jsr paddleReset
 
 
 
 main0:
 
 
-ldi r0,0xE0 # load current direction of b
-ld r0,r0
-ldi r1,0
-cmp r1,r0
-beq ballLeft
-ldi r1,1
-cmp r1,r0
-beq ballRight
-
-main1:
 
 jsr checkIfScore
 jsr initialHitDetect
 jsr paddleShift
+jsr ballMoveStart
 br main0
 
 
@@ -74,34 +65,34 @@ checkIfScore:
 
 ldi r0,0xDE
 ld r0,r0
-ldi r1,0
+ldi r1,0  ## needs rework
 cmp r0,r1
-beq scoreLeft
-ldi r1,255
+#beq scoreLeft
+ldi r1,255  ## needs rework
 cmp r0,r1
-beq scoreRight
+#beq scoreRight
 rts
 
-scoreLeft:
+#scoreLeft:
 
-ldi r0,0xDD
-ld r0,r1
-inc r1
-st r0,r1
-ldi r0,0xFD
-st r0,r1
-rts
+#ldi r0,0xDD
+#ld r0,r1
+#inc r1
+#st r0,r1
+#ldi r0,0xFD
+#st r0,r1
+#rts
 
 
-scoreRight:
+#scoreRight:
 
-ldi r0,0xDC
-ld r0,r1
-inc r1
-st r0,r1
-ldi r0,0xFC
-st r0,r1
-rts
+#ldi r0,0xDC
+#ld r0,r1
+#inc r1
+#st r0,r1
+#ldi r0,0xFC
+#st r0,r1
+#rts
 
 
 scoreboardReset:
@@ -142,26 +133,24 @@ ldi r0,0xFF
 st r0,r1
 rts
 
-ballMove:
+ballMoveStart:
 
-ldi r0,0xDE
-ld r0,r0
-ldi r1,0xDF
-ld r1,r1
+
 ldi r2,0xE0
 ld r2,r2
 clr r3
-cmp r2,r3
-beq ballRight
-br ballLeft
-
-
-ballRight:
-
 ldi r0,0xE1
 ld r0,r0
 ldi r1,0xE2
 ld r1,r1
+cmp r2,r3
+beq ballMove
+neg r0
+br ballMove
+
+
+ballMove:
+
 
 ldi r2,0xDE # load x coord ball
 ld r2,r2
@@ -176,33 +165,8 @@ add r2,r1
 st r2,r1 # st new coord
 ldi r2,0xFF
 st r2,r1
-br main1
+br main0
 
-
-
-ballLeft:
-
-ldi r0,0xE1
-ld r0,r0
-neg r0
-ldi r1,0xE2
-ld r1,r1
-
-
-ldi r2,0xDE # load x coord ball
-ld r2,r3
-add r3,r0
-st r2,r0 # st new x coord
-ldi r2,0xFE
-st r2,r0
-
-ldi r2,0xDF # load y coord ball
-ld r2,r3
-add r3,r1
-st r2,r1 # st new y coord
-ldi r2,0xFF
-st r2,r1
-br main1
 
 
 #---------------------HIT DETECTION-------------------------------
