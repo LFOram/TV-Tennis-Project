@@ -1604,7 +1604,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <comp lib="0" loc="(1170,450)" name="Constant">
       <a name="facing" val="west"/>
       <a name="width" val="8"/>
-      <a name="value" val="0x5"/>
+      <a name="value" val="0xff"/>
     </comp>
     <comp lib="2" loc="(1280,660)" name="Multiplexer">
       <a name="facing" val="north"/>
