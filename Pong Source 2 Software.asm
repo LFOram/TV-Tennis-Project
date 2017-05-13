@@ -20,12 +20,13 @@
 # DF bally-codev
 #
 #
-# E0 Direction
+# E0 Directionx
 # E1 XSpeed: dc 4
 # E2 YAngle: dc 0
 # E3 initialBallPositionX: dc 128
 # E4 initialBallPositionY: dc 128
 # E5 initialPaddlePosition: dc 128
+# E6 directiony
 #
 # 
 
@@ -74,13 +75,13 @@ br main0
 
 checkIfScore:
 
-ldi r0,0xDE
-ld r0,r0
-ldi r1,0  ## needs rework
-cmp r0,r1
+#ldi r0,0xDE
+#ld r0,r0
+#ldi r1,0  ## needs rework
+#cmp r0,r1
 #beq scoreLeft
-ldi r1,255  ## needs rework
-cmp r0,r1
+#ldi r1,255  ## needs rework
+#cmp r0,r1
 #beq scoreRight
 br initialHitDetect
 
@@ -147,35 +148,55 @@ br paddleReset
 ballMoveStart:
 
 
-ldi r2,0xE0
-ld r2,r2
 clr r3
-ldi r0,0xE1
+ldi r0,0xE1 #load xspeed
 ld r0,r0
-ldi r1,0xE2
+ldi r1,0xE2 #load yangle
 ld r1,r1
 cmp r2,r3
 beq ballMove
-neg r0
 br ballMove
 
 
 ballMove:
 
 
+#X
 ldi r2,0xDE # load x coord ball
 ld r2,r3
-add r3,r0
+ldi r2,0xE0 #load directionx
+ld r2,r2
+tst r2
+beq right
+sub r3,r0
+br store0
+right:
+add r3,r0 #add xspeed and x coord
+store0:
+ldi r2,0xDE
 st r2,r0  # store new x coord
 ldi r2,0xFE
 st r2,r0
 
+
+#Y
 ldi r2,0xDF # load y coord
 ld r2,r3
-add r3,r1
+ldi r2,0xE6
+ld r2,r2
+tst r2
+beq up
+sub r3,r1
+br store1
+up:
+add r3,r1 # add yangle and y coord
+store1:
+ldi r2,0xDF
 st r2,r1 # st new coord
 ldi r2,0xFF
 st r2,r1
+
+
 br main0
 
 
