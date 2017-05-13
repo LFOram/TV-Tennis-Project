@@ -23,7 +23,9 @@
 # E0 Direction
 # E1 XSpeed: dc 4
 # E2 YAngle: dc 0
-#
+# E3 initialBallPositionX: dc 128
+# E4 initialBallPositionY: dc 128
+# E5 initialPaddlePosition: dc 128
 #
 # 
 
@@ -31,8 +33,17 @@
 asect 0x00
 
 
-ldi r0,4
+ldi r0,15
 ldi r1,0xE1
+st r1,r0
+ldi r1,0xE2
+st r1,r0
+ldi r0,128
+ldi r1,0xE3
+st r1,r0
+ldi r1,0xE4
+st r1,r0
+ldi r1,0xE5
 st r1,r0
 #-----------------------------MAIN-----------------------------------
 
@@ -153,15 +164,15 @@ ballMove:
 
 
 ldi r2,0xDE # load x coord ball
-ld r2,r2
-add r2,r0
+ld r2,r3
+add r3,r0
 st r2,r0  # store new x coord
 ldi r2,0xFE
 st r2,r0
 
 ldi r2,0xDF # load y coord
-ld r2,r2
-add r2,r1
+ld r2,r3
+add r3,r1
 st r2,r1 # st new coord
 ldi r2,0xFF
 st r2,r1
