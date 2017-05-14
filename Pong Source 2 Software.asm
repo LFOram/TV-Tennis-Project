@@ -80,32 +80,31 @@ ldi r0,0xDE
 ld r0,r0
 ldi r1,0  ## needs rework
 cmp r0,r1
-#beq scoreLeft
+beq scoreLeft
 ldi r1,255  ## needs rework
 cmp r0,r1
-#beq scoreRight
+beq scoreRight
 br initialHitDetect
 
-#scoreLeft:
+scoreLeft:
 
-#ldi r0,0xDD
-#ld r0,r1
-#inc r1
-#st r0,r1
-#ldi r0,0xFD
-#st r0,r1
-#rts
+ldi r0,0xDD
+ld r0,r1
+ldi r2,0xFD
+br score
 
+scoreRight:
 
-#scoreRight:
+ldi r0,0xDC
+ld r0,r1
+ldi r2,0xFC
+br score
 
-#ldi r0,0xDC
-#ld r0,r1
-#inc r1
-#st r0,r1
-#ldi r0,0xFC
-#st r0,r1
-#rts
+score:
+inc r1
+st r0,r1
+st r2,r1
+br initialHitDetect
 
 
 scoreboardReset:
@@ -248,17 +247,43 @@ sub r2,r1
 add r1,r2 # get both sides of paddle
 cmp r0,r1 # if ball is higher than lowest part of paddle, continue
 bhi secondCheck
-br ballMoveStart
+br hitDetectBoundaries
 secondCheck:
 cmp r0,r2 # if ball is lower than top of paddle, continue
 blo hitDetectedPaddle
-br ballMoveStart
+br hitDetectBoundaries
 hitDetectedPaddle:
 ldi r0,0xE0
 ld r0,r1
 not r1
 st r0,r1
+br hitDetectBoundaries
+
+
+
+hitDetectBoundaries:
+
+ldi r0,0xDF
+ld r0,r0
+
+ldi r1,15   # needs revising
+ldi r2,240 # needs revising
+cmp r0,r1
+blo invertY
+cmp r0,r2
+bhi invertY
 br ballMoveStart
+invertY:
+ldi r3,0xE6
+ld r3,r2
+not r2
+st r3,r2
+br ballMoveStart
+
+
+
+
+
 
 
 
