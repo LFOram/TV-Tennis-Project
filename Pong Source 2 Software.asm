@@ -184,13 +184,13 @@ br hitDetectPaddle
 
 hitDetectPaddle:
 
-ldi r2,0xDF  #load y coord
+ldi r2,0xDF  #load y coord of ball
 ld r2,r2
 ldi r1,8
-sub r2,r1
+sub r0,r1  # get lower coord of paddle
 move r1,r3
 ldi r1,8
-add r2,r1 # get both sides of paddle
+add r0,r1 # get higher coord of paddle
 cmp r2,r3 # if ball is higher than lowest part of paddle, continue
 bhi secondCheck
 br hitDetectBoundaries
