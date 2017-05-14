@@ -186,7 +186,7 @@ hitDetectPaddle:
 
 ldi r2,0xDF  #load y coord of ball
 ld r2,r2
-ldi r1,15 #15 to get to highest point of paddle
+ldi r1,16 #16 to get to highest point of paddle
 add r0,r1  # get highest point of paddle
 cmp r2,r0 # if ball is higher than lowest part of paddle, continue
 bhi secondCheck
