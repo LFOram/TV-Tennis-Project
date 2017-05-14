@@ -176,7 +176,7 @@ br hitDetectPaddle
 
 hitDetectLoadR:
 
-ldi r0,0xFB #load rpad
+ldi r0,0xF8 #load rpad bottom bottom coord
 ld r0,r0
 br hitDetectPaddle
 
@@ -186,12 +186,9 @@ hitDetectPaddle:
 
 ldi r2,0xDF  #load y coord of ball
 ld r2,r2
-ldi r1,8
-sub r0,r1  # get lower coord of paddle
-move r1,r3
-ldi r1,8
-add r0,r1 # get higher coord of paddle
-cmp r2,r3 # if ball is higher than lowest part of paddle, continue
+ldi r1,15 #15 to get to highest point of paddle
+add r0,r1  # get highest point of paddle
+cmp r2,r0 # if ball is higher than lowest part of paddle, continue
 bhi secondCheck
 br hitDetectBoundaries
 secondCheck:
@@ -199,9 +196,9 @@ cmp r2,r1 # if ball is lower than top of paddle, continue
 blo hitDetectedPaddle
 br hitDetectBoundaries
 hitDetectedPaddle:
-ldi r0,0xE0
+ldi r0,0xE0  #load direction x
 ld r0,r1
-not r1
+not r1  #reverse direction when ball hits paddle
 st r0,r1
 br hitDetectBoundaries
 
