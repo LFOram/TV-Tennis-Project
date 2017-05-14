@@ -70,7 +70,53 @@ br main0
 
 
 
+#------------------------------RESET------------------------------------
 
+scoreboardReset:
+
+ldi r0,0xDC
+ld r0,r0
+ldi r1,0
+st r0,r1
+ldi r0,0xFC
+st r0,r1
+ldi r0,0xDD
+ld r0,r0
+st r0,r1
+ldi r0,0xFD
+st r0,r1
+br ballReset
+
+ballReset:
+
+ldi r0,0xDE
+ldi r1,initialBallPositionX
+ldc r1,r1
+st r0,r1
+ldi r2,0xFE
+#st r0,r1
+ldi r0,0xDF
+ldi r1,initialBallPositionY
+ldc r1,r1
+st r0,r1
+ldi r0,0xFF
+st r2,r1
+st r0,r1
+br paddleReset
+
+paddleReset:
+
+ldi r0,0xDA 
+ldi r2,0xDB
+ldi r1,initialPaddlePosition
+ldc r1,r1
+st r0,r1
+st r2,r1
+ldi r0,0xFA
+ldi r2,0xFB
+st r0,r1
+st r2,r1
+br main0
 
 #---------------------------SCOREBOARD--------------------------------
 
@@ -106,105 +152,6 @@ st r0,r1
 st r2,r1
 br initialHitDetect
 
-
-scoreboardReset:
-
-ldi r0,0xDC
-ld r0,r0
-ldi r1,0
-st r0,r1
-ldi r0,0xFC
-st r0,r1
-ldi r0,0xDD
-ld r0,r0
-st r0,r1
-ldi r0,0xFD
-st r0,r1
-
-br ballReset
-
-
-
-
-#-----------------------------BALL----------------------------------------
-
-
-ballReset:
-
-ldi r0,0xDE
-ldi r1,initialBallPositionX
-ldc r1,r1
-st r0,r1
-ldi r2,0xFE
-#st r0,r1
-ldi r0,0xDF
-ldi r1,initialBallPositionY
-ldc r1,r1
-st r0,r1
-ldi r0,0xFF
-st r2,r1
-st r0,r1
-br paddleReset
-
-ballMoveStart:
-
-
-clr r3
-ldi r0,0xE1 #load xspeed
-ld r0,r0
-ldi r1,0xE2 #load yangle
-ld r1,r1
-cmp r2,r3
-beq ballMove
-br ballMove
-
-
-ballMove:
-
-
-#X
-ldi r2,0xDE # load x coord ball
-ld r2,r3
-ldi r2,0xE0 #load directionx
-ld r2,r2
-tst r2
-beq right
-sub r3,r0
-br store0
-right:
-add r3,r0 #add xspeed and x coord
-store0:
-ldi r2,0xDE
-st r2,r0  # store new x coord
-#ldi r2,0xFE
-#st r2,r0
-
-
-#Y
-ldi r2,0xDF # load y coord
-ld r2,r3
-ldi r2,0xE6
-ld r2,r2
-tst r2
-beq up
-sub r3,r1
-br store1
-up:
-add r3,r1 # add yangle and y coord
-store1:
-ldi r2,0xDF
-st r2,r1 # st new coord
-ldi r3,0xFE
-ldi r2,0xFF
-st r3,r0
-st r2,r1
-
-
-
-br main0
-
-
-
 #---------------------HIT DETECTION-------------------------------
 
 initialHitDetect:
@@ -218,10 +165,7 @@ beq hitDetectLoadL
 ldi r1,254    # check if ball is one away from board edge
 cmp r0,r1
 beq hitDetectLoadR
-br ballMoveStart
-
-
-
+br hitDetectBoundaries
 
 hitDetectLoadL:
 
@@ -281,28 +225,64 @@ st r3,r2
 br ballMoveStart
 
 
+#-----------------------------BALL----------------------------------------
 
 
 
+ballMoveStart:
 
+
+clr r3
+ldi r0,0xE1 #load xspeed
+ld r0,r0
+ldi r1,0xE2 #load yangle
+ld r1,r1
+cmp r2,r3
+beq ballMove
+br ballMove
+
+ballMove:
+
+#X
+ldi r2,0xDE # load x coord ball
+ld r2,r3
+ldi r2,0xE0 #load directionx
+ld r2,r2
+tst r2
+beq right
+sub r3,r0
+br store0
+right:
+add r3,r0 #add xspeed and x coord
+store0:
+ldi r2,0xDE
+st r2,r0  # store new x coord
+
+
+#Y
+ldi r2,0xDF # load y coord
+ld r2,r3
+ldi r2,0xE6
+ld r2,r2
+tst r2
+beq up
+sub r3,r1
+br store1
+up:
+add r3,r1 # add yangle and y coord
+store1:
+ldi r2,0xDF
+st r2,r1 # st new coord
+ldi r3,0xFE
+ldi r2,0xFF
+st r3,r0
+st r2,r1
+br main0
 
 
 #----------------------PADDLE-------------------------------------
 
 
-paddleReset:
-
-ldi r0,0xDA 
-ldi r2,0xDB
-ldi r1,initialPaddlePosition
-ldc r1,r1
-st r0,r1
-st r2,r1
-ldi r0,0xFA
-ldi r2,0xFB
-st r0,r1
-st r2,r1
-br main0
 
 
 
