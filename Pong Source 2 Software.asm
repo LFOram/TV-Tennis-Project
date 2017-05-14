@@ -189,11 +189,11 @@ ld r2,r2
 ldi r1,16 #16 to get to highest point of paddle
 add r0,r1  # get highest point of paddle
 cmp r2,r0 # if ball is higher than lowest part of paddle, continue
-bhi secondCheck
+bhs secondCheck
 br hitDetectBoundaries
 secondCheck:
 cmp r2,r1 # if ball is lower than top of paddle, continue
-blo hitDetectedPaddle
+bls hitDetectedPaddle
 br hitDetectBoundaries
 hitDetectedPaddle:
 ldi r0,0xE0  #load direction x
