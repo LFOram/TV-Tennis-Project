@@ -34,7 +34,7 @@
 asect 0x00
 
 
-ldi r0,15
+ldi r0,8
 ldi r1,0xE1
 st r1,r0
 ldi r1,0xE2
@@ -124,33 +124,33 @@ checkIfScore:
 
 ldi r0,0xDE
 ld r0,r0
-ldi r1,0  ## needs rework
+ldi r1,5  ## needs rework
 cmp r0,r1
-beq scoreLeft
-ldi r1,255  ## needs rework
+blo scoreLeft
+ldi r1,250  ## needs rework
 cmp r0,r1
-beq scoreRight
+bhi scoreRight
 br initialHitDetect
 
 scoreLeft:
-
-ldi r0,0xDD
-ld r0,r1
-ldi r2,0xFD
-br score
-
-scoreRight:
 
 ldi r0,0xDC
 ld r0,r1
 ldi r2,0xFC
 br score
 
+scoreRight:
+
+ldi r0,0xDD
+ld r0,r1
+ldi r2,0xFD
+br score
+
 score:
 inc r1
 st r0,r1
 st r2,r1
-br initialHitDetect
+br resetBoard
 
 #---------------------HIT DETECTION-------------------------------
 
@@ -159,24 +159,24 @@ initialHitDetect:
 ldi r0,0xDE
 ld r0,r0
 
-ldi r1,1         #*********** check 
+ldi r1,16         #*********** check 
 cmp r0,r1
-beq hitDetectLoadL
-ldi r1,254    # check if ball is one away from board edge
+blo hitDetectLoadR
+ldi r1,239    # check if ball is one away from board edge
 cmp r0,r1
-beq hitDetectLoadR
+bhi hitDetectLoadL
 br hitDetectBoundaries
 
 hitDetectLoadL:
 
-ldi r0,0xDA
+ldi r0,0xDA  #load lpad
 ld r0,r0
 br hitDetectPaddle
 
 
 hitDetectLoadR:
 
-ldi r0,0xDB
+ldi r0,0xFB #load rpad
 ld r0,r0
 br hitDetectPaddle
 
@@ -184,16 +184,18 @@ br hitDetectPaddle
 
 hitDetectPaddle:
 
-ldi r2,0xDF
+ldi r2,0xDF  #load y coord
 ld r2,r2
 ldi r1,8
 sub r2,r1
-add r1,r2 # get both sides of paddle
-cmp r0,r1 # if ball is higher than lowest part of paddle, continue
+move r1,r3
+ldi r1,8
+add r2,r1 # get both sides of paddle
+cmp r2,r3 # if ball is higher than lowest part of paddle, continue
 bhi secondCheck
 br hitDetectBoundaries
 secondCheck:
-cmp r0,r2 # if ball is lower than top of paddle, continue
+cmp r2,r1 # if ball is lower than top of paddle, continue
 blo hitDetectedPaddle
 br hitDetectBoundaries
 hitDetectedPaddle:
@@ -210,8 +212,8 @@ hitDetectBoundaries:
 ldi r0,0xDF
 ld r0,r0
 
-ldi r1,15   # needs revising
-ldi r2,240 # needs revising
+ldi r1,8   # needs revising
+ldi r2,247 # needs revising
 cmp r0,r1
 blo invertY
 cmp r0,r2
@@ -250,10 +252,10 @@ ldi r2,0xE0 #load directionx
 ld r2,r2
 tst r2
 beq right
-sub r3,r0
+add r3,r0
 br store0
 right:
-add r3,r0 #add xspeed and x coord
+sub r3,r0 #add xspeed and x coord
 store0:
 ldi r2,0xDE
 st r2,r0  # store new x coord
