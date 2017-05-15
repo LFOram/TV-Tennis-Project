@@ -1,4 +1,16 @@
 
+# TEAM PROJECT - TEAM 7
+# TV-TENNIS (PONG)
+#
+# STEFAN COOPER (15033114)
+# LEON ORAM (15030640)
+# JAWAD JAMIL (15037070)
+# MEHMET BEKIROGLU (15035262)
+#
+#
+#
+#------------------MEMORY LOCATION REFERENCE----------------------------
+#
 # F8 paddle reset r and l
 # F9 directionx
 # FA lpad input
@@ -33,22 +45,12 @@
 
 asect 0x00
 
-#ldi r0,0b11111111
-#ldi r1,0xE6
-#st r1,r0
 ldi r0,8
 ldi r1,0xE1
 st r1,r0
 ldi r0,4
 ldi r1,0xE2
 st r1,r0
-#ldi r0,128
-#ldi r1,0xE3
-#st r1,r0
-#ldi r1,0xE4
-#st r1,r0
-#ldi r1,0xE5
-#st r1,r0
 #-----------------------------MAIN-----------------------------------
 
 reset:
@@ -56,35 +58,22 @@ reset:
 br scoreboardReset
 resetBoard:
 br ballReset
-#jsr paddleReset
-
-
 
 main0:
 
-
-
 br checkIfScore
-#jsr initialHitDetect
-#jsr paddleShift
-#jsr ballMoveStart
 br main0
-
-
-
 
 #------------------------------RESET------------------------------------
 
 scoreboardReset:
 
 ldi r0,0xDC
-#ld r0,r0
 ldi r1,0
 st r0,r1
 ldi r0,0xFC
 st r0,r1
 ldi r0,0xDD
-#ld r0,r0
 st r0,r1
 ldi r0,0xFD
 st r0,r1
@@ -97,7 +86,6 @@ ldi r1,initialBallPositionX
 ldc r1,r1
 st r0,r1
 ldi r2,0xFE
-#st r0,r1
 ldi r0,0xDF
 ldi r1,initialBallPositionY
 ldc r1,r1
@@ -125,10 +113,10 @@ checkIfScore:
 
 ldi r0,0xDE
 ld r0,r0
-ldi r1,5  ## needs rework
+ldi r1,5  
 cmp r0,r1
 blo scoreLeft
-ldi r1,250  ## needs rework
+ldi r1,250  
 cmp r0,r1
 bhi scoreRight
 br initialHitDetect
@@ -162,7 +150,7 @@ initialHitDetect:
 ldi r0,0xDE
 ld r0,r0
 
-ldi r1,16         #*********** check 
+ldi r1,16        
 cmp r0,r1
 blo hitDetectLoadR
 ldi r1,239    # check if ball is one away from board edge
@@ -249,13 +237,9 @@ not r2
 st r3,r2
 br ballMoveStart
 
-
 #-----------------------------BALL----------------------------------------
 
-
-
 ballMoveStart:
-
 
 ldi r0,0xE1 #load xspeed
 ld r0,r0
@@ -280,7 +264,6 @@ store0:
 ldi r2,0xDE
 st r2,r0  # store new x coord
 
-
 #Y
 ldi r2,0xDF # load y coord
 ld r2,r3
@@ -301,13 +284,7 @@ st r3,r0
 st r2,r1
 br main0
 
-
 #----------------------PADDLE-------------------------------------
-
-
-
-
-
 
 #paddleShift:
 #
