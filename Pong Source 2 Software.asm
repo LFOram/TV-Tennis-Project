@@ -39,13 +39,6 @@ ldi r1,0xE1
 st r1,r0
 ldi r1,0xE2
 st r1,r0
-ldi r0,128
-ldi r1,0xE3
-st r1,r0
-ldi r1,0xE4
-st r1,r0
-ldi r1,0xE5
-st r1,r0
 #-----------------------------MAIN-----------------------------------
 
 reset:
@@ -212,9 +205,9 @@ ld r0,r0
 ldi r1,8   # needs revising
 ldi r2,247 # needs revising
 cmp r0,r1
-blo invertY
+bls invertY
 cmp r0,r2
-bhi invertY
+bhs invertY
 br ballMoveStart
 invertY:
 ldi r3,0xE6
