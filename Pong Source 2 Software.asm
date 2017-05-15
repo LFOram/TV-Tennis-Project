@@ -78,13 +78,13 @@ br main0
 scoreboardReset:
 
 ldi r0,0xDC
-ld r0,r0
+#ld r0,r0
 ldi r1,0
 st r0,r1
 ldi r0,0xFC
 st r0,r1
 ldi r0,0xDD
-ld r0,r0
+#ld r0,r0
 st r0,r1
 ldi r0,0xFD
 st r0,r1
@@ -148,8 +148,11 @@ br score
 score:
 ld r0,r1
 inc r1
+ldi r3,9
 st r0,r1
 st r2,r1
+cmp r1,r3
+beq reset
 br resetBoard
 
 #---------------------HIT DETECTION-------------------------------
