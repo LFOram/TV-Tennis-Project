@@ -33,12 +33,22 @@
 
 asect 0x00
 
-
+#ldi r0,0b11111111
+#ldi r1,0xE6
+#st r1,r0
 ldi r0,8
 ldi r1,0xE1
 st r1,r0
+ldi r0,4
 ldi r1,0xE2
 st r1,r0
+#ldi r0,128
+#ldi r1,0xE3
+#st r1,r0
+#ldi r1,0xE4
+#st r1,r0
+#ldi r1,0xE5
+#st r1,r0
 #-----------------------------MAIN-----------------------------------
 
 reset:
@@ -127,19 +137,18 @@ br initialHitDetect
 
 scoreLeft:
 
-ldi r0,0xDC
-ld r0,r1
-ldi r2,0xFC
+#ldi r0,0xDD
+#ldi r2,0xFD
 br score
 
 scoreRight:
 
-ldi r0,0xDD
-ld r0,r1
-ldi r2,0xFD
+#ldi r0,0xDC
+#ldi r2,0xFC
 br score
 
 score:
+ld r0,r1
 inc r1
 st r0,r1
 st r2,r1
@@ -163,23 +172,22 @@ br hitDetectBoundaries
 hitDetectLoadL:
 
 ldi r0,0xDA  #load lpad
-ld r0,r0
 br hitDetectPaddle
 
 
 hitDetectLoadR:
 
 ldi r0,0xF8 #load rpad bottom bottom coord
-ld r0,r0
 br hitDetectPaddle
 
 
 
 hitDetectPaddle:
 
+ld r0,r0
 ldi r2,0xDF  #load y coord of ball
 ld r2,r2
-ldi r1,16 #16 to get to highest point of paddle
+ldi r1,18 #16 to get to highest point of paddle
 add r0,r1  # get highest point of paddle
 cmp r2,r0 # if ball is higher than lowest part of paddle, continue
 bhs secondCheck
@@ -189,9 +197,31 @@ cmp r2,r1 # if ball is lower than top of paddle, continue
 bls hitDetectedPaddle
 br hitDetectBoundaries
 hitDetectedPaddle:
+ldi r1,239
+cmp r2,r1
+bhs switch
+ldi r1,3
+add r0,r1
+cmp r2,r1
+bls downAng
+ldi r1,16
+add r0,r1
+cmp r2,r1
+bhs downAng
+br switch
+downAng:
+ldi r3,0xE6
+ld r3,r1
+not r1 #reverse direction y if ball hits top or bottom paddle
+st r3,r1
+br switch
+
+
+
+switch:
 ldi r0,0xE0  #load direction x
 ld r0,r1
-not r1  #reverse direction when ball hits paddle
+not r1  #reverse direction x when ball hits paddle
 st r0,r1
 br hitDetectBoundaries
 
@@ -258,10 +288,10 @@ ldi r2,0xE6
 ld r2,r2
 tst r2
 beq up
-sub r3,r1
+add r3,r1
 br store1
 up:
-add r3,r1 # add yangle and y coord
+sub r3,r1 # add yangle and y coord
 store1:
 ldi r2,0xDF
 st r2,r1 # st new coord
