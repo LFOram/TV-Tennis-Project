@@ -1,8 +1,8 @@
 
-# F8 keyboard x
-# F9 
-# FA lpad
-# FB rpad
+# F8 paddle reset r and l
+# F9 directionx
+# FA lpad input
+# FB rpad input
 # FC lscore
 # FD rscore
 # FE ballx
@@ -10,7 +10,7 @@
 #
 #
 #
-# D8 keyboard-codev x
+# D8 
 # D9 
 # DA lpad-codev
 # DB rpad-codev
@@ -115,8 +115,8 @@ ldi r1,initialPaddlePosition
 ldc r1,r1
 st r0,r1
 st r2,r1
-ldi r0,0xFA
-ldi r2,0xFB
+ldi r0,0xF8
+ldi r2,0xF8
 st r0,r1
 st r2,r1
 br main0
@@ -137,14 +137,14 @@ br initialHitDetect
 
 scoreLeft:
 
-#ldi r0,0xDD
-#ldi r2,0xFD
+ldi r0,0xDD
+ldi r2,0xFD
 br score
 
 scoreRight:
 
-#ldi r0,0xDC
-#ldi r2,0xFC
+ldi r0,0xDC
+ldi r2,0xFC
 br score
 
 score:
@@ -171,13 +171,13 @@ br hitDetectBoundaries
 
 hitDetectLoadL:
 
-ldi r0,0xDA  #load lpad
+ldi r0,0xFA  #load lpad
 br hitDetectPaddle
 
 
 hitDetectLoadR:
 
-ldi r0,0xF8 #load rpad bottom bottom coord
+ldi r0,0xFB #load rpad bottom bottom coord
 br hitDetectPaddle
 
 
@@ -222,6 +222,8 @@ switch:
 ldi r0,0xE0  #load direction x
 ld r0,r1
 not r1  #reverse direction x when ball hits paddle
+ldi r2,0xF9
+st r2,r1
 st r0,r1
 br hitDetectBoundaries
 
@@ -254,13 +256,10 @@ br ballMoveStart
 ballMoveStart:
 
 
-clr r3
 ldi r0,0xE1 #load xspeed
 ld r0,r0
 ldi r1,0xE2 #load yangle
 ld r1,r1
-cmp r2,r3
-beq ballMove
 br ballMove
 
 ballMove:
