@@ -134,6 +134,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(4060,310)" to="(4100,310)"/>
     <wire from="(2910,350)" to="(2910,360)"/>
     <wire from="(100,100)" to="(100,140)"/>
+    <wire from="(2160,880)" to="(2160,890)"/>
     <wire from="(740,350)" to="(740,580)"/>
     <wire from="(3230,350)" to="(3230,380)"/>
     <wire from="(430,230)" to="(440,230)"/>
@@ -434,7 +435,6 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(4360,90)" to="(4360,250)"/>
     <wire from="(4910,260)" to="(4910,300)"/>
     <wire from="(910,540)" to="(1380,540)"/>
-    <wire from="(2220,830)" to="(2220,900)"/>
     <wire from="(1060,240)" to="(1070,240)"/>
     <wire from="(1320,60)" to="(1320,110)"/>
     <wire from="(1170,350)" to="(1180,350)"/>
@@ -450,6 +450,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(2900,360)" to="(2900,380)"/>
     <wire from="(1630,490)" to="(1630,780)"/>
     <wire from="(230,520)" to="(680,520)"/>
+    <wire from="(2140,880)" to="(2140,910)"/>
     <wire from="(590,420)" to="(590,430)"/>
     <wire from="(1180,50)" to="(1180,70)"/>
     <wire from="(2420,760)" to="(2440,760)"/>
@@ -504,13 +505,13 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(100,60)" to="(100,100)"/>
     <wire from="(2050,210)" to="(2060,210)"/>
     <wire from="(2310,670)" to="(2310,680)"/>
-    <wire from="(2150,830)" to="(2150,840)"/>
     <wire from="(20,90)" to="(40,90)"/>
     <wire from="(3270,350)" to="(3270,380)"/>
     <wire from="(400,160)" to="(410,160)"/>
     <wire from="(2050,200)" to="(2070,200)"/>
     <wire from="(140,220)" to="(150,220)"/>
     <wire from="(2810,210)" to="(2810,240)"/>
+    <wire from="(2150,830)" to="(2150,850)"/>
     <wire from="(330,540)" to="(330,780)"/>
     <wire from="(30,110)" to="(40,110)"/>
     <wire from="(1320,110)" to="(1340,110)"/>
@@ -557,6 +558,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(4230,420)" to="(4230,430)"/>
     <wire from="(4440,240)" to="(4440,440)"/>
     <wire from="(2120,210)" to="(2140,210)"/>
+    <wire from="(2160,890)" to="(2180,890)"/>
     <wire from="(270,810)" to="(270,820)"/>
     <wire from="(1380,190)" to="(1380,260)"/>
     <wire from="(3830,210)" to="(3830,250)"/>
@@ -791,7 +793,6 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(3930,260)" to="(3930,300)"/>
     <wire from="(640,810)" to="(640,840)"/>
     <wire from="(2040,290)" to="(2040,300)"/>
-    <wire from="(2210,900)" to="(2220,900)"/>
     <wire from="(20,30)" to="(120,30)"/>
     <wire from="(890,350)" to="(890,560)"/>
     <wire from="(1420,310)" to="(1420,320)"/>
@@ -864,7 +865,6 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(3090,400)" to="(3140,400)"/>
     <wire from="(1950,780)" to="(1950,840)"/>
     <wire from="(1060,330)" to="(1070,330)"/>
-    <wire from="(1040,450)" to="(1170,450)"/>
     <wire from="(440,230)" to="(440,270)"/>
     <wire from="(440,30)" to="(450,30)"/>
     <wire from="(1460,800)" to="(1460,900)"/>
@@ -897,6 +897,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(890,810)" to="(890,840)"/>
     <wire from="(2900,380)" to="(2910,380)"/>
     <wire from="(4420,400)" to="(4460,400)"/>
+    <wire from="(1170,450)" to="(1170,460)"/>
     <wire from="(1450,90)" to="(1450,100)"/>
     <wire from="(2710,190)" to="(2720,190)"/>
     <wire from="(380,550)" to="(380,780)"/>
@@ -1001,6 +1002,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(2050,230)" to="(2070,230)"/>
     <wire from="(1170,380)" to="(1580,380)"/>
     <wire from="(3700,60)" to="(3880,60)"/>
+    <wire from="(2180,890)" to="(2180,910)"/>
     <wire from="(3050,250)" to="(3090,250)"/>
     <wire from="(1000,470)" to="(1010,470)"/>
     <wire from="(750,350)" to="(750,590)"/>
@@ -1383,11 +1385,6 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
       <a name="text" val="FC - Left Score"/>
       <a name="font" val="SansSerif plain 18"/>
     </comp>
-    <comp lib="0" loc="(2210,900)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="label" val="P-Reset"/>
-      <a name="labelfont" val="SansSerif plain 9"/>
-    </comp>
     <comp lib="0" loc="(310,240)" name="Constant">
       <a name="facing" val="north"/>
       <a name="width" val="32"/>
@@ -1635,7 +1632,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <comp lib="0" loc="(1170,450)" name="Constant">
       <a name="facing" val="west"/>
       <a name="width" val="8"/>
-      <a name="value" val="0xff"/>
+      <a name="value" val="0x45"/>
     </comp>
     <comp lib="0" loc="(1010,470)" name="Tunnel">
       <a name="width" val="32"/>
@@ -1710,40 +1707,45 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <comp lib="0" loc="(1060,340)" name="Pull Resistor">
       <a name="facing" val="north"/>
     </comp>
+    <comp lib="5" loc="(2140,910)" name="Button">
+      <a name="facing" val="north"/>
+      <a name="label" val="RESET"/>
+      <a name="labelloc" val="south"/>
+    </comp>
     <comp lib="4" loc="(1540,50)" name="ROM">
       <a name="contents">addr/data: 8 8
 d0 8 d1 e1 a4 d0 4 d1
 e2 a4 ee 12 ee 24 ee 49
 ee e d0 dc b0 d1 0 a1
 d0 fc a1 d0 dd b0 a1 d0
-fd a1 ee 24 d0 de d1 f6
-f5 a1 d2 fe d0 df d1 f7
+fd a1 ee 24 d0 de d1 fd
+f5 a1 d2 fe d0 df d1 fe
 f5 a1 d0 ff a9 a1 ee 38
-d0 da d2 db d1 f8 f5 a1
-a9 d0 fa d2 fb a1 a9 ee
+d0 da d2 db d1 ff f5 a1
+a9 d0 f8 d2 f8 a1 a9 ee
 e d0 de b0 d1 5 71 e3
-58 d1 fa 71 e8 5a ee 62
-ee 5c ee 5c b1 8d a1 a9
+58 d1 fa 71 e8 5e ee 6a
+d0 dd d2 fd ee 64 d0 dc
+d2 fc ee 64 b1 8d a1 a9
 ee c d0 de b0 d1 10 71
-e3 75 d1 ef 71 e8 71 ee
-ab d0 da ee 79 d0 f8 ee
-79 b0 d2 df ba d1 12 11
-78 e2 85 ee ab 79 e9 8a
-ee ab d1 ef 79 e2 a4 d1
-3 11 79 e9 9d d1 10 11
-79 e2 9d ee a4 d3 e6 bd
-81 ad ee a4 d0 e0 b1 81
-a1 ee ab d0 df b0 d1 8
-d2 f7 71 e9 ba 72 e2 ba
-ee c1 d3 e6 be 82 ae ee
-c1 3f d0 e1 b0 d1 e2 b5
-7b e0 cd ee cd d2 de bb
-d2 e0 ba a e0 d9 1c ee
-da 3c d2 de a8 d2 df bb
-d2 e6 ba a e0 e9 1d ee
-ea 3d d2 df a9 d3 fe d2
-ff ac a9 ee e d4 80 80
-80
+e3 7d d1 ef 71 e8 79 ee
+b6 d0 fa ee 81 d0 fb ee
+81 b0 d2 df ba d1 12 11
+78 e2 8d ee b6 79 e9 92
+ee b6 d1 ef 79 e2 ac d1
+3 11 79 e9 a5 d1 10 11
+79 e2 a5 ee ac d3 e6 bd
+81 ad ee ac d0 e0 b1 81
+d2 f9 a9 a1 ee b6 d0 df
+b0 d1 8 d2 f7 71 e9 c5
+72 e2 c5 ee cc d3 e6 be
+82 ae ee cc d0 e1 b0 d1
+e2 b5 ee d4 d2 de bb d2
+e0 ba a e0 e0 1c ee e1
+3c d2 de a8 d2 df bb d2
+e6 ba a e0 f0 1d ee f1
+3d d2 df a9 d3 fe d2 ff
+ac a9 ee e d4 80 80 80
 </a>
     </comp>
     <comp lib="0" loc="(1270,350)" name="Tunnel">
@@ -1754,11 +1756,6 @@ ff ac a9 ee e d4 80 80
     <comp lib="5" loc="(590,420)" name="Hex Digit Display"/>
     <comp lib="0" loc="(4770,270)" name="Probe">
       <a name="facing" val="south"/>
-    </comp>
-    <comp lib="5" loc="(2150,840)" name="Button">
-      <a name="facing" val="north"/>
-      <a name="label" val="RESET"/>
-      <a name="labelloc" val="south"/>
     </comp>
     <comp lib="0" loc="(3090,210)" name="Probe">
       <a name="facing" val="south"/>
@@ -2345,6 +2342,11 @@ ff ac a9 ee e d4 80 80
       <a name="bit31" val="1"/>
     </comp>
     <comp lib="7" loc="(1300,200)" name="CdM-8"/>
+    <comp lib="0" loc="(2180,910)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="P-Reset"/>
+      <a name="labelfont" val="SansSerif plain 9"/>
+    </comp>
     <comp lib="2" loc="(130,780)" name="Multiplexer">
       <a name="facing" val="north"/>
       <a name="width" val="32"/>
@@ -2369,6 +2371,11 @@ ff ac a9 ee e d4 80 80
       <a name="width" val="8"/>
       <a name="label" val="L-Paddle Out"/>
       <a name="labelfont" val="SansSerif plain 9"/>
+    </comp>
+    <comp lib="1" loc="(2150,850)" name="OR Gate">
+      <a name="facing" val="north"/>
+      <a name="size" val="30"/>
+      <a name="inputs" val="2"/>
     </comp>
     <comp lib="0" loc="(4460,210)" name="Probe">
       <a name="facing" val="south"/>
@@ -3204,6 +3211,7 @@ ff ac a9 ee e d4 80 80
     </comp>
     <comp lib="4" loc="(680,90)" name="Register">
       <a name="width" val="32"/>
+      <a name="trigger" val="falling"/>
     </comp>
     <comp lib="1" loc="(600,160)" name="Controlled Buffer">
       <a name="facing" val="north"/>
