@@ -116,9 +116,7 @@ ldc r1,r1
 st r0,r1
 st r2,r1
 ldi r0,0xF8
-ldi r2,0xF8
 st r0,r1
-st r2,r1
 br main0
 
 #---------------------------SCOREBOARD--------------------------------
@@ -187,7 +185,7 @@ hitDetectPaddle:
 ld r0,r0
 ldi r2,0xDF  #load y coord of ball
 ld r2,r2
-ldi r1,18 #16 to get to highest point of paddle
+ldi r1,24 #16 to get to highest point of paddle
 add r0,r1  # get highest point of paddle
 cmp r2,r0 # if ball is higher than lowest part of paddle, continue
 bhs secondCheck
@@ -200,11 +198,11 @@ hitDetectedPaddle:
 ldi r1,239
 cmp r2,r1
 bhs switch
-ldi r1,3
+ldi r1,7
 add r0,r1
 cmp r2,r1
 bls downAng
-ldi r1,16
+ldi r1,15
 add r0,r1
 cmp r2,r1
 bhs downAng
